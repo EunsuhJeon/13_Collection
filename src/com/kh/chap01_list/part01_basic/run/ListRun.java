@@ -1,6 +1,7 @@
 package com.kh.chap01_list.part01_basic.run;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import com.kh.chap01_list.part01_basic.model.vo.Music;
 
@@ -42,6 +43,7 @@ public class ListRun {
 	public static void main(String[] args) {
 
 		ArrayList list = new ArrayList(3); // 크기 지정할 수도 있고 안할 수도 있음!!
+		// 특별히 크기 지정하지 않으면 10짜리 배열이 만들어짐
 		
 		System.out.println(list); // 안에 아무것도 없음!! (비어있는 상태)
 		
@@ -77,14 +79,50 @@ public class ListRun {
 		
 		// 5. size(): 리스트의 사이즈 반환시켜주는 메소드 (즉, 몇 개의 데이터가 담겨있는지)
 		System.out.println("리스트의 사이즈: " + list.size());  // 배열과 비교해보자면 length같은 느낌
+		System.out.println("리스트의 마지막 인덱스: " + (list.size()-1));
 		
-		// 6. get(int index): 해당 인덱스 위치의 객체를 반환시켜주는 메소드
+		// 6. get(int index): E => 해당 인덱스 위치의 객체를 반환시켜주는 메소드
 		Music m = (Music)list.get(0);
 		String s = (String)list.get(3);
 		
 		System.out.println(m);
 		System.out.println(s);
+		System.out.println(list.get(1));
+		System.out.println(((Music)list.get(1)).getTitle());
 		
+		// 7. subList(int index1, int index2): List	=> 추출해서 새로운 List로 반환
+		List sub = list.subList(0, 2);
+		System.out.println(sub);
+		
+		// 8. addAll(Collection c): 컬렉션을 통째로 뒤에 추가시켜주는 메소드
+		/*
+		list.addAll(sub);
+		System.out.println(list);
+		*/
+		// 뒤가 아닌 중간에 추가하고 싶다면
+		list.addAll(2,sub);
+		System.out.println(list);
+		
+		// 9. isEmpty(): boolean => 컬렉션이 비어있는지 묻는 메소드 (비었으면 true, 아니면 false값을 반환)
+		System.out.println(list.isEmpty());
+		
+		// 10. clear() : 싹 비워주는 메소드
+		//list.clear();
+		System.out.println(list);
+		System.out.println(list.isEmpty());
+		
+		// 반복문을 통해 순차적으로 출력
+		System.out.println("========================");
+		// 1) for loop문
+		for(int i=0; i<list.size(); i++) {
+			System.out.println(list.get(i));
+		}
+		System.out.println("========================");
+		// 2) for each문 (향상된 for문)
+		
+		for(Object o : list) { // o = list.get(0); => o = list.get(1); ...
+			System.out.println(o);
+		}
 		
 	}
 
