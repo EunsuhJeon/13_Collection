@@ -14,10 +14,9 @@ public class MusicController {
 		list.add(new Music("밥이달다", "강보람"));
 	}
 	
-	public void insertMusic(String title, String artist) {
+	public void insertMusic(String title, String artist) { // 변수명은 의미를 부여해서 적어줘야 다른 개발자가 파악하기 쉬움!
 		
 		list.add(new Music(title,artist));
-		
 		
 	}
 	
@@ -41,7 +40,7 @@ public class MusicController {
 		return result;
 	}
 	
-	
+
 	public ArrayList<Music> searchMusic(String keyword) {
 		
 		ArrayList<Music> searchList = new ArrayList<>(); // 검색된 Music객체를 차곡차곡 담을 list
@@ -56,7 +55,43 @@ public class MusicController {
 		return searchList;
 	}
 	
+	// 2. 심화버전
+	public ArrayList<Music> searchMusic(int menu, String keyword) {
+		
+		ArrayList<Music> searchList = new ArrayList<>(); // 검색결과를 보관할 리스트(현재 텅 비어있음)
+		
+		if(menu == 1) { // => 곡명으로 검색
+			for(int i=0; i<list.size(); i++) {
+				if(list.get(i).getTitle().contains(keyword)) {
+					searchList.add(list.get(i));
+				}
+			}
+		} else { // => 가수명으로 검색
+			for(int i=0; i<list.size(); i++) {
+				if(list.get(i).getArtist().contains(keyword)) {
+					searchList.add(list.get(i));
+				}
+			}
+		}
+		return searchList;
+	}
 	
+	public int updateMusic(String title, String upArtist, String upTitle) {
+		
+		int result = 0;
+		
+		for(int i=0; i<list.size(); i++) {
+			Music m = list.get(i);
+			if(m.getTitle().equals(title)) {
+				m.setArtist(upArtist);
+				m.setTitle(upTitle);
+				result = 1;
+				break;
+			}
+		}
+		// result = 0(수정할 곡 찾지 못함) | 1(성공적으로 수정됨)
+		return result;
+	}
 	
 	
 	
